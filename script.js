@@ -1703,12 +1703,8 @@ async function answerQuestion(){
         "questionInput"
     )
     .value
+    .toLowerCase()
     .trim();
-
-    if(!question){
-
-        return;
-    }
 
     const answerBox =
 
@@ -1717,111 +1713,294 @@ async function answerQuestion(){
         "questionAnswer"
     );
 
+    if(!question){
+
+        answerBox.innerHTML =
+        "Please ask a question.";
+
+        return;
+    }
+
+    const githubScore =
+    profileAnalysis.githubScore;
+
+    const careerScore =
+    profileAnalysis.careerScore;
+
+    const developerType =
+    profileAnalysis.developerType;
+
+    const totalStars =
+    getTotalStars();
+
+    const repoCount =
+    currentRepos.length;
+
+    let answer = "";
+
+    /* STRENGTHS */
+
+    if(
+        question.includes("strength")
+    ){
+
+        answer =
+
+        `
+        Strengths:
+
+        • Developer Type:
+        ${developerType}
+
+        • GitHub Score:
+        ${githubScore}/100
+
+        • Total Repositories:
+        ${repoCount}
+
+        • Total Stars:
+        ${totalStars}
+
+        • Strongest Language:
+        ${getTopLanguage()}
+        `;
+    }
+
+    /* WEAKNESSES */
+
+    else if(
+        question.includes("weak")
+    ){
+
+        answer =
+
+        `
+        Areas for Improvement:
+
+        • Add more repository descriptions
+
+        • Improve README files
+
+        • Increase GitHub engagement
+
+        • Add project screenshots
+
+        • Build more advanced projects
+        `;
+    }
+
+    /* INTERNSHIP */
+
+    else if(
+
+        question.includes(
+            "internship"
+        )
+
+    ){
+
+        if(careerScore >= 80){
+
+            answer =
+
+            `
+            This profile appears internship ready.
+
+            Strong repository activity,
+            good technology stack,
+            and consistent project work.
+            `;
+        }
+
+        else{
+
+            answer =
+
+            `
+            More projects and documentation
+            are recommended before applying
+            for internships.
+            `;
+        }
+    }
+
+    /* JOB READY */
+
+    else if(
+
+        question.includes("job")
+
+        ||
+
+        question.includes("hire")
+
+    ){
+
+        if(careerScore >= 85){
+
+            answer =
+
+            `
+            This profile shows strong
+            job readiness and demonstrates
+            practical development skills.
+            `;
+        }
+
+        else{
+
+            answer =
+
+            `
+            Additional projects,
+            contributions,
+            and documentation
+            would improve job readiness.
+            `;
+        }
+    }
+
+    /* WEB DEVELOPMENT */
+
+    else if(
+
+        question.includes("web")
+
+    ){
+
+        if(
+
+            developerType.includes(
+                "Frontend"
+            )
+
+        ){
+
+            answer =
+
+            `
+            This profile is suitable
+            for Web Development roles.
+
+            Strong JavaScript and
+            frontend indicators detected.
+            `;
+        }
+
+        else{
+
+            answer =
+
+            `
+            Limited web development
+            evidence detected.
+
+            More frontend projects
+            are recommended.
+            `;
+        }
+    }
+
+    /* AI ML */
+
+    else if(
+
+        question.includes("ai")
+
+        ||
+
+        question.includes("ml")
+
+        ||
+
+        question.includes(
+            "machine learning"
+        )
+
+    ){
+
+        answer =
+
+        `
+        AI / ML Analysis:
+
+        Developer Type:
+        ${developerType}
+
+        Top Language:
+        ${getTopLanguage()}
+
+        GitHub Score:
+        ${githubScore}
+
+        Confidence:
+        ${profileAnalysis.developerConfidence}%
+        `;
+    }
+
+    /* REPOSITORIES */
+
+    else if(
+
+        question.includes("repo")
+
+        ||
+
+        question.includes(
+            "repository"
+        )
+
+    ){
+
+        answer =
+
+        `
+        Repository Statistics:
+
+        Total Repositories:
+        ${repoCount}
+
+        Total Stars:
+        ${totalStars}
+
+        Primary Language:
+        ${getTopLanguage()}
+        `;
+    }
+
+    /* DEFAULT */
+
+    else{
+
+        answer =
+
+        `
+        I can answer questions about:
+
+        • Strengths
+
+        • Weaknesses
+
+        • Internship Readiness
+
+        • Job Readiness
+
+        • AI/ML Focus
+
+        • Web Development
+
+        • Repositories
+
+        • Career Recommendations
+        `;
+    }
+
     answerBox.innerHTML =
-
-    "Thinking...";
-
-    const topRepos =
-
-    profileAnalysis.topRepos
-
-    ?.map(repo =>
-
-        `${repo.name}
-         (${repo.stargazers_count} stars)`
-
-    )
-
-    .join(", ");
-
-    const languageSummary =
-
-    Object.entries(
-
-        profileAnalysis.languages || {}
-
-    )
-
-    .map(
-
-        ([language,count]) =>
-
-        `${language}: ${count}`
-
-    )
-
-    .join(", ");
-
-    const prompt =
-
-`
-GitHub Profile Analysis
-
-Name:
-${currentProfile.name}
-
-Bio:
-${currentProfile.bio}
-
-Followers:
-${currentProfile.followers}
-
-Following:
-${currentProfile.following}
-
-Repositories:
-${currentRepos.length}
-
-GitHub Score:
-${profileAnalysis.githubScore}
-
-Career Score:
-${profileAnalysis.careerScore}
-
-Developer Type:
-${profileAnalysis.developerType}
-
-Confidence:
-${profileAnalysis.developerConfidence}
-
-Primary Language:
-${getTopLanguage()}
-
-Total Stars:
-${getTotalStars()}
-
-Language Distribution:
-${languageSummary}
-
-Top Repositories:
-${topRepos}
-
-AI Insights:
-${profileAnalysis.insights.join("; ")}
-
-User Question:
-${question}
-
-Answer professionally.
-`;
-
-    const response =
-
-    await askAI(
-        prompt
-    );
-
-    answerBox.innerHTML =
-
-    response.replace(
-
+    answer.replace(
         /\n/g,
-
         "<br>"
-
     );
 }
-
 /* =====================================
    PDF REPORT
 ===================================== */

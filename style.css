@@ -1,0 +1,1079 @@
+/* =====================================
+   RESET
+===================================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+}
+
+/* =====================================
+   ROOT
+===================================== */
+
+:root{
+
+    --bg:#080808;
+
+    --card:#121212;
+
+    --border:#262626;
+
+    --text:#ffffff;
+
+    --muted:#9ca3af;
+
+    --hover:#1b1b1b;
+}
+
+/* =====================================
+   BODY
+===================================== */
+
+body{
+
+    font-family:'Segoe UI',sans-serif;
+
+    background:
+    radial-gradient(
+        circle at top,
+        #161616,
+        #080808
+    );
+
+    color:var(--text);
+
+    min-height:100vh;
+
+    padding:30px;
+}
+
+/* =====================================
+   CONTAINER
+===================================== */
+
+.container{
+
+    max-width:1400px;
+
+    margin:auto;
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+header{
+
+    text-align:center;
+
+    margin-bottom:50px;
+}
+
+header h1{
+
+    font-size:3.8rem;
+
+    font-weight:900;
+
+    letter-spacing:-2px;
+
+    margin-bottom:10px;
+}
+
+header p{
+
+    color:var(--muted);
+
+    font-size:1.1rem;
+}
+
+/* =====================================
+   SEARCH
+===================================== */
+
+.search-section{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-bottom:40px;
+}
+
+.search-section input{
+
+    flex:1;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    border:1px solid var(--border);
+
+    background:#111;
+
+    color:white;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:.3s;
+}
+
+.search-section input:focus{
+
+    border-color:white;
+
+    box-shadow:
+    0 0 20px
+    rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+}
+
+.search-section button{
+
+    min-width:170px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:white;
+
+    color:black;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.search-section button:hover{
+
+    transform:translateY(-3px);
+
+    background:#e5e5e5;
+}
+
+/* =====================================
+   LOADING
+===================================== */
+
+#loading{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin:30px 0;
+}
+
+.spinner{
+
+    width:70px;
+
+    height:70px;
+
+    border:6px solid #222;
+
+    border-top:6px solid white;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+    }
+
+    to{
+
+        transform:rotate(360deg);
+    }
+}
+
+#loadingText{
+
+    font-size:18px;
+
+    font-weight:600;
+}
+
+/* =====================================
+   ERROR BOX
+===================================== */
+
+#errorBox{
+
+    background:#2b0f0f;
+
+    border:1px solid #ff4d4d;
+
+    color:#ffb3b3;
+
+    padding:16px;
+
+    border-radius:16px;
+
+    margin-bottom:25px;
+
+    font-weight:600;
+}
+
+/* =====================================
+   DASHBOARD ANIMATION
+===================================== */
+
+#dashboard{
+
+    animation:fadeIn .5s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(15px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+    }
+}
+
+/* =====================================
+   SECTION TITLES
+===================================== */
+
+section{
+
+    margin-bottom:35px;
+}
+
+section h2{
+
+    margin-bottom:20px;
+
+    font-size:1.7rem;
+
+    font-weight:700;
+}
+
+/* =====================================
+   HIDDEN
+===================================== */
+
+.hidden{
+
+    display:none !important;
+}
+
+/* =====================================
+   PROFILE CARD
+===================================== */
+
+.profile-card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:30px;
+
+    padding:35px;
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+    transition:.3s;
+}
+
+.profile-card:hover{
+
+    border-color:#444;
+
+    box-shadow:
+    0 0 30px
+    rgba(
+        255,
+        255,
+        255,
+        0.04
+    );
+}
+
+.profile-card img{
+
+    width:180px;
+
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:5px solid white;
+
+    margin-bottom:20px;
+}
+
+.profile-card h2{
+
+    font-size:2rem;
+
+    margin-bottom:10px;
+}
+
+.profile-card p{
+
+    color:#d1d5db;
+
+    margin:8px 0;
+
+    line-height:1.7;
+}
+
+.profile-card a{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:700;
+}
+
+.profile-card a:hover{
+
+    opacity:.8;
+}
+
+/* =====================================
+   SCORE GRID
+===================================== */
+
+.score-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(
+            220px,
+            1fr
+        )
+    );
+
+    gap:20px;
+}
+
+.score-card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:25px;
+
+    text-align:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.3s;
+}
+
+.score-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:2px;
+
+    background:white;
+
+    opacity:.15;
+}
+
+.score-card:hover{
+
+    transform:
+    translateY(-6px);
+
+    border-color:#444;
+}
+
+.score-card h3{
+
+    color:var(--muted);
+
+    font-size:1rem;
+
+    margin-bottom:10px;
+}
+
+.score-card p{
+
+    font-size:2rem;
+
+    font-weight:800;
+}
+
+/* =====================================
+   PROFILE GRADE
+===================================== */
+
+#profileGrade{
+
+    font-size:2.4rem !important;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+/* =====================================
+   ANALYSIS BOX
+===================================== */
+
+.analysis-box{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:25px;
+
+    line-height:1.8;
+
+    transition:.3s;
+}
+
+.analysis-box:hover{
+
+    box-shadow:
+    0 0 25px
+    rgba(
+        255,
+        255,
+        255,
+        0.03
+    );
+}
+
+/* =====================================
+   DEVELOPER TYPE
+===================================== */
+
+#developerType{
+
+    font-size:1.1rem;
+
+    line-height:1.9;
+}
+
+#developerType h3{
+
+    font-size:2rem;
+
+    margin-bottom:10px;
+}
+
+#developerType ul{
+
+    margin-top:15px;
+
+    margin-left:20px;
+}
+
+#developerType li{
+
+    margin-bottom:8px;
+}
+
+/* =====================================
+   TECH STACK
+===================================== */
+
+#techStack{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(
+            220px,
+            1fr
+        )
+    );
+
+    gap:20px;
+}
+
+.stack-card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    padding:16px;
+
+    transition:.3s;
+}
+
+.stack-card:hover{
+
+    transform:
+    translateY(-4px);
+
+    border-color:#444;
+}
+
+.stack-card h3{
+
+    font-size:1.3rem;
+
+    margin-bottom:6px;
+}
+
+.stack-card p{
+
+    color:#d1d5db;
+}
+
+/* =====================================
+   AI INSIGHTS
+===================================== */
+
+.insights-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(
+            280px,
+            1fr
+        )
+    );
+
+    gap:20px;
+}
+
+.insight-card{
+
+    background:var(--card);
+
+    border-left:5px solid white;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    line-height:1.9;
+
+    transition:.3s;
+}
+
+.insight-card:hover{
+
+    transform:
+    translateY(-4px);
+}
+
+/* =====================================
+   AI STATUS
+===================================== */
+
+#aiStatus{
+
+    color:#9ca3af;
+
+    margin-bottom:15px;
+
+    font-size:14px;
+
+    font-weight:600;
+}
+
+/* =====================================
+   REPOSITORY TABLE
+===================================== */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    overflow:hidden;
+
+    border-radius:20px;
+}
+
+thead{
+
+    background:white;
+
+    color:black;
+}
+
+th{
+
+    padding:18px;
+
+    text-align:left;
+
+    font-size:15px;
+}
+
+td{
+
+    padding:18px;
+
+    background:var(--card);
+
+    border-bottom:1px solid var(--border);
+}
+
+tr:hover td{
+
+    background:var(--hover);
+}
+
+#repoTable a{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+}
+
+#repoTable a:hover{
+
+    text-decoration:underline;
+}
+
+/* =====================================
+   TIMELINE
+===================================== */
+
+.timeline-item{
+
+    background:var(--card);
+
+    border-left:4px solid white;
+
+    border-radius:15px;
+
+    padding:16px;
+
+    margin-bottom:15px;
+
+    line-height:1.5;
+
+    transition:.3s;
+}
+
+.timeline-item:hover{
+
+    transform:
+    translateX(6px);
+}
+
+/* =====================================
+   LANGUAGE ANALYSIS
+===================================== */
+
+#chartSection{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:25px;
+
+    padding:35px;
+}
+
+.chart-wrapper{
+
+    width:100%;
+
+    max-width:500px;
+
+    height:500px;
+
+    margin:30px auto;
+}
+
+#languageChart{
+
+    width:100% !important;
+
+    height:100% !important;
+}
+
+#languageSummary{
+
+    line-height:2;
+
+    font-size:1rem;
+}
+
+/* =====================================
+   QUESTION SECTION
+===================================== */
+
+.question-box{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-bottom:20px;
+}
+
+.question-box input{
+
+    flex:1;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#111;
+
+    color:white;
+
+    border:1px solid var(--border);
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:.3s;
+}
+
+.question-box input:focus{
+
+    border-color:white;
+
+    box-shadow:
+    0 0 15px
+    rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+}
+
+.question-box button{
+
+    width:140px;
+
+    flex-shrink:0;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:white;
+
+    color:black;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.question-box button:hover{
+
+    transform:
+    translateY(-3px);
+
+    background:#e8e8e8;
+}
+
+/* =====================================
+   AI ANSWER BOX
+===================================== */
+
+#questionAnswer{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    min-height:auto;
+
+    padding:25px;
+
+    line-height:1.6;
+}
+
+#questionAnswer ul{
+
+    margin-top:12px;
+
+    margin-left:25px;
+}
+
+#questionAnswer li{
+
+    margin: 10px 0;
+}
+
+/* =====================================
+   DOWNLOAD BUTTON
+===================================== */
+
+#downloadSection{
+
+    text-align:center;
+}
+
+#pdfBtn{
+
+    padding:18px 40px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:white;
+
+    color:black;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+#pdfBtn:hover{
+
+    transform:
+    translateY(-4px);
+
+    background:#e6e6e6;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer{
+
+    text-align:center;
+
+    margin-top:60px;
+
+    padding:20px;
+
+    color:#777;
+
+    font-size:14px;
+}
+
+/* =====================================
+   SCROLLBAR
+===================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+
+    background:#111;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#444;
+
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#666;
+}
+
+/* =====================================
+   MOBILE RESPONSIVE
+===================================== */
+
+@media(max-width:768px){
+
+    body{
+
+        padding:15px;
+    }
+
+    header h1{
+
+        font-size:2.3rem;
+    }
+
+    header p{
+
+        font-size:.95rem;
+    }
+
+    .search-section{
+
+        flex-direction:column;
+    }
+
+    .question-box{
+
+        flex-direction:column;
+    }
+
+    .question-box button{
+
+        width:100%;
+    }
+
+    .chart-wrapper{
+
+        width:280px;
+
+        height:280px;
+    }
+
+    .score-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    #techStack{
+
+        grid-template-columns:1fr;
+    }
+
+    .insights-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    table{
+
+        display:block;
+
+        overflow-x:auto;
+    }
+
+    #pdfBtn{
+
+        width:100%;
+    }
+}
+
+/* =====================================
+   FINAL POLISH
+===================================== */
+
+html{
+
+    scroll-behavior:smooth;
+}
+
+::selection{
+
+    background:white;
+
+    color:black;
+}
+
+.profile-card,
+.score-card,
+.stack-card,
+.insight-card,
+.analysis-box,
+.timeline-item{
+
+    transition:
+    transform .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease;
+}
+#developerType{
+
+    line-height:1.6;
+}
+
+#developerType ul{
+
+    margin-top:10px;
+
+    margin-left:25px;
+}
+
+#developerType li{
+
+    margin-bottom:6px;
+}

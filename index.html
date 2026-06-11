@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DevLens AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+    <!-- Chart Data Labels -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+
+        <header>
+
+            <h1>DevLens AI</h1>
+
+            <p>
+                AI-Powered GitHub Profile Analyzer for Developers, Interns, and Job Seekers
+            </p>
+
+        </header>
+
+        <!-- SEARCH -->
+
+        <section class="search-section">
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Enter GitHub Username">
+
+            <button onclick="getProfile()">
+
+                Analyze
+
+            </button>
+
+        </section>
+
+        <!-- LOADING -->
+
+        <div id="loading" class="hidden">
+
+            <div class="spinner"></div>
+
+            <p id="loadingText">
+
+                Analyzing GitHub Profile...
+
+            </p>
+
+        </div>
+
+        <!-- ERROR BOX -->
+
+        <div id="errorBox" class="hidden">
+
+        </div>
+
+        <!-- PROFILE DASHBOARD -->
+
+        <div id="dashboard">
+
+        </div>
+
+        <!-- SCORE SECTION -->
+
+        <section
+            id="scoreSection"
+            class="hidden">
+
+            <div class="score-grid">
+
+                <div class="score-card">
+
+                    <h3>
+                        GitHub Score
+                    </h3>
+
+                    <p id="githubScore">
+                        0
+                    </p>
+
+                </div>
+
+                <div class="score-card">
+
+                    <h3>
+                        Career Readiness
+                    </h3>
+
+                    <p id="careerScore">
+                        0%
+                    </p>
+
+                </div>
+
+                <div class="score-card">
+
+                    <h3>
+                        Total Stars
+                    </h3>
+
+                    <p id="totalStars">
+                        0
+                    </p>
+
+                </div>
+
+                <div class="score-card">
+
+                    <h3>
+                        Repositories
+                    </h3>
+
+                    <p id="repoCount">
+                        0
+                    </p>
+
+                </div>
+
+                <div class="score-card">
+
+                    <h3>
+                        Profile Grade
+                    </h3>
+
+                    <p id="profileGrade">
+                        -
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- DEVELOPER CLASSIFICATION -->
+
+        <section
+            id="developerSection"
+            class="hidden">
+
+            <h2>
+
+                Developer Classification
+
+            </h2>
+
+            <div class="analysis-box">
+
+                <div id="developerType">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- TECH STACK -->
+
+        <section
+            id="stackSection"
+            class="hidden">
+
+            <h2>
+
+                Technology Stack Detection
+
+            </h2>
+
+            <div id="techStack">
+
+            </div>
+
+        </section>
+
+        <!-- AI INSIGHTS -->
+
+        <section
+            id="insightsSection"
+            class="hidden">
+
+            <h2>
+
+                AI Insights
+
+            </h2>
+
+            <div
+                id="insightsGrid"
+                class="insights-grid">
+
+            </div>
+
+        </section>
+
+        <!-- TOP REPOSITORIES -->
+
+        <section
+            id="repoSection"
+            class="hidden">
+
+            <h2>
+
+                Top 5 Repositories
+
+            </h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Repository
+                        </th>
+
+                        <th>
+                            Language
+                        </th>
+
+                        <th>
+                            Stars
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="repoTable">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- ACTIVITY TIMELINE -->
+
+        <section
+            id="activitySection"
+            class="hidden">
+
+            <h2>
+
+                Recent Activity Timeline
+
+            </h2>
+
+            <div id="activityTimeline">
+
+            </div>
+
+        </section>
+
+        <!-- LANGUAGE ANALYSIS -->
+
+        <section
+            id="chartSection"
+            class="hidden">
+
+            <h2>
+
+                Language Analysis
+
+            </h2>
+
+            <div class="analysis-box">
+
+                <p id="languageSummary">
+
+                    Language analysis will appear here.
+
+                </p>
+
+            </div>
+
+            <div class="chart-wrapper">
+
+                <canvas id="languageChart">
+
+                </canvas>
+
+            </div>
+
+        </section>
+
+        <!-- AI ASSISTANT -->
+
+        <section
+            id="questionSection"
+            class="hidden">
+
+            <h2>
+
+                Ask About This Profile
+
+            </h2>
+
+            <p id="aiStatus">
+
+                🟢 AI Assistant Ready
+
+            </p>
+
+            <div class="question-box">
+
+                <input
+                    type="text"
+                    id="questionInput"
+                    placeholder="Ask a question about this profile">
+
+                <button onclick="answerQuestion()">
+
+                    Ask
+
+                </button>
+
+            </div>
+
+            <div id="questionAnswer">
+
+                Ask questions like:
+
+                <ul>
+
+                    <li>
+                        What are this developer's strengths?
+                    </li>
+
+                    <li>
+                        Is this profile internship ready?
+                    </li>
+
+                    <li>
+                        Is this profile suitable for web development?
+                    </li>
+
+                    <li>
+                        What career path is recommended?
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+        <!-- PDF DOWNLOAD -->
+
+        <section
+            id="downloadSection"
+            class="hidden">
+
+            <button id="pdfBtn">
+
+                Download PDF Report
+
+            </button>
+
+        </section>
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <p>
+
+                DevLens AI • GitHub Profile Intelligence Platform
+
+            </p>
+
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
